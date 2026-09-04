@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관심상품</title>
+<title>관심상품ㅇ</title>
 <style>
     .favorite-toolbar { margin-bottom: 12px; }
     .favorite-table { width: 100%; border-collapse: collapse; }
