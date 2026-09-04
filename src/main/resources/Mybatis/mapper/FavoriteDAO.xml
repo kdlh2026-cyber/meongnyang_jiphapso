@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.meongnyang_Jiphapso.dao.IFavoriteDAO">
+
+    <resultMap id="favoriteResultMap" type="com.springboot.meongnyang_Jiphapso.dto.FavoriteDTO">
+        <id property="faNo" column="FA_NO"/>
+        <result property="faToken" column="FA_TOKEN"/>
+        <result property="faAt" column="FA_AT"/>
+        <result property="mNo" column="M_NO"/>
+        <result property="pNo" column="P_NO"/>
+        <result property="pName" column="P_NAME"/>
+        <result property="pMainImg" column="P_MAIN_IMG"/>
+        <result property="oPrice" column="O_PRICE"/>
+    </resultMap>
+
+    <sql id="favoriteJoinBase">
+        SELECT
+            f.fa_no      AS FA_NO,
+            f.fa_token   AS FA_TOKEN,
+            f.fa_at      AS FA_AT,
+            f.m_no       AS M_NO,
+            f.p_no       AS P_NO,
+            p.p_title    AS P_NAME,
+            def_o.o_main_img AS P_MAIN_IMG,
+            def_o.o_price    AS O_PRICE
+        FROM dc_favorite f
+        JOIN dc_product p ON f.p_no = p.p_no
+        LEFT JOIN dc_product_option def_o
+               ON def_o.p_no = p.p_no AND def_o.o_default = 'Y'
+    </sql>
+
+    <!-- 찜하기 등록 -->
+    <insert id="insertFavorite" parameterType="com.springboot.meongnyang_Jiphapso.dto.FavoriteDTO"
+            useGeneratedKeys="true" keyProperty="faNo" keyColumn="FA_NO">
+        INSERT INTO dc_favorite (fa_token, fa_at, m_no, p_no)
+        VALUES (#{faToken}, SYSDATE, #{mNo}, #{pNo})
+    </insert>
+
+    <!-- 단건 삭제 -->
+    <delete id="deleteFavorite">
+        DELETE FROM dc_favorite WHERE fa_no = #{faNo}
+    </delete>
+
+    <!-- 선택 삭제 (DAO 메서드명 deletrFavoriteList 오타에 맞춰 id도 동일하게) -->
+    <delete id="deletrFavoriteList">
+        DELETE FROM dc_favorite
+         WHERE fa_no IN
+        <foreach collection="faNoList" item="faNo" open="(" separator="," close=")">
+            #{faNo}
+        </foreach>
+    </delete>
+
+    <!-- 회원 전체삭제 -->
+    <delete id="deleteFavoriteAllByMember">
+        DELETE FROM dc_favorite WHERE m_no = #{mNo}
+    </delete>
+
+    <!-- 단건 조회 -->
+    <select id="selectFavoriteOne" resultMap="favoriteResultMap">
+        <include refid="favoriteJoinBase"/>
+        WHERE f.fa_no = #{faNo}
+    </select>
+
+    <!-- 회원 관심상품 목록 -->
+    <select id="selectFavoriteListByMember" resultMap="favoriteResultMap">
+        <include refid="favoriteJoinBase"/>
+        WHERE f.m_no = #{mNo}
+        ORDER BY f.fa_at DESC
+    </select>
+
+    <!-- 비회원 관심상품 목록 -->
+    <select id="selectFavoriteListByToken" resultMap="favoriteResultMap">
+        <include refid="favoriteJoinBase"/>
+        WHERE f.fa_token = #{faToken}
+           AND f.m_no IS NULL
+        ORDER BY f.fa_at DESC
+    </select>
+
+    <!-- 회원 - 이미 찜한 상품인지 여부 -->
+    <select id="checkFavoriteExists" resultType="int">
+        SELECT COUNT(*) FROM dc_favorite
+         WHERE m_no = #{mNo} AND p_no = #{pNo}
+    </select>
+
+    <!-- 비회원 - 이미 찜한 상품인지 여부 -->
+    <select id="checkFavoriteExistsByToken" resultType="int">
+        SELECT COUNT(*) FROM dc_favorite
+         WHERE fa_token = #{faToken} AND p_no = #{pNo}
+    </select>
+
+    <!-- 관리자 - 전체 관심상품 목록 -->
+    <select id="selectFavoriteListAll" resultMap="favoriteResultMap">
+        <include refid="favoriteJoinBase"/>
+        ORDER BY f.fa_at DESC
+    </select>
+
+</mapper>

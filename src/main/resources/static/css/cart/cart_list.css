@@ -1,0 +1,250 @@
+@charset "UTF-8";
+
+/* ================= 상품 카드 스타일 추가 ================= */
+
+/* 상품 카드 */
+.product-card {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 30px rgba(0,0,0,0.15);
+}
+
+/* 상품 이미지 */
+.product-image {
+    width: 100%;
+    height: 70%;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .4s;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.08);
+}
+
+/* 상품 정보 */
+.product-info {
+    padding: 15px;
+}
+
+.product-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 아이콘 버튼 */
+.btn-icon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    color: #333;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s ease;
+    z-index: 10;
+}
+
+.btn-wish {
+    top: 15px;
+    right: 15px;
+}
+
+.btn-wish:hover,
+.btn-wish.is-active {
+    color: #ff4757;
+    transform: scale(1.2);
+}
+
+.btn-cart {
+    bottom: 15px;
+    right: 15px;
+}
+
+.btn-cart:hover {
+    color: #000;
+    transform: translateY(-5px) scale(1.1);
+}
+
+.btn-cart.is-active {
+    color: #ff8c00;
+}
+
+/* 장바구니 토스트 */
+.toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #FFE9D6;
+    color: #7A4A1F;
+    padding: 10px 18px;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: .25s;
+}
+
+.toast.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+.toast-link {
+    color: #B9591A;
+    font-weight: bold;
+    text-decoration: none;
+}
+/* ================= 장바구니 페이지 스타일 ================= */
+
+.empty {
+    text-align: center;
+    color: #999;
+    padding: 60px 0;
+    font-size: 15px;
+}
+
+.empty .submit {
+    display: inline-block;
+    margin-top: 12px;
+    color: #B9591A;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#cartContent {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.select-all {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.select-all .delete-link {
+    margin-left: auto;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 0 12px;
+    background: #f2f2f2;
+}
+
+.cart-item .info {
+    flex: 1;
+}
+
+.cart-item .info .name {
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.cart-item .info .price {
+    color: #333;
+    font-weight: bold;
+}
+
+.qty-box {
+    display: flex;
+    align-items: center;
+    margin: 0 16px;
+}
+
+.qty-box button {
+    width: 26px;
+    height: 26px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.qty-box span {
+    display: inline-block;
+    width: 36px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.delete-link {
+    color: #999;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.delete-link:hover {
+    color: #ff4757;
+}
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.checkout-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: #FFD400;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.checkout-btn:hover {
+    background: #f0c700;
+}

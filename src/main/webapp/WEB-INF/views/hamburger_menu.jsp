@@ -59,11 +59,11 @@
         <div class="cat">
           <h3>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="12" r="1.5"/><line x1="13" y1="10" x2="18" y2="10"/><line x1="13" y1="14" x2="18" y2="14"/></svg>
-            동물등록
+            ♥ 🛒 ♥
           </h3>
           <ul>
-            <li><a href="#">국가 동물등록</a></li>
-            <li><a href="#">분실칩 재구매</a></li>
+            <li><a href="cart/list">장바구니</a></li>
+            <li><a href="favorite/list">관심상품</a></li>
             <li><a href="#">등록카드 발급</a></li>
           </ul>
         </div>
