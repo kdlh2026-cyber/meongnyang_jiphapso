@@ -1,0 +1,23 @@
+package com.springboot.meongnyang_Jiphapso.dto;
+
+import java.time.LocalDateTime;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import lombok.Data;
+
+@Data
+public class ProductOptionDto {
+	private int o_no;
+	private String o_name;
+	private int o_price;
+	private int o_origin_price;
+	private String o_main_img;
+	private MultipartFile o_img;
+	private LocalDateTime o_date;
+	private int o_quantity;
+	private String o_type_size;
+	private String o_color;
+	private String o_default;
+	private int	p_no;
+}
