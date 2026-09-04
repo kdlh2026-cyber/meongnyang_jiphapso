@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.meongnyang_Jiphapso.dao.IProductDao">
+	
+	<insert id="ProductWrite">
+		<selectKey keyProperty="p_no" resultType="integer" order="BEFORE">
+			select dc_product_seq.NEXTVAL from dual
+		</selectKey>
+		insert into dc_product(p_no,p_title,p_brand,p_category,p_type)
+		values(#{p_no},#{p_title},#{p_brand},#{p_category},#{p_type})
+	</insert>
+	<insert id="ProductOptionWrite">
+		<selectKey keyProperty="o_no" resultType="integer" order="BEFORE">
+			select dc_product_option_seq.NEXTVAL from dual
+		</selectKey>
+		insert into dc_product_option(o_no,o_price,o_origin_price,o_main_img,o_quantity,o_type_size,o_color,o_default,p_no)
+		values(#{o_no},#{o_price},#{o_origin_price},#{o_main_img},#{o_quantity},#{o_type_size},#{o_color},#{o_default},#{p_no})
+	</insert>
+	<insert id="ProductDetailImageWrite">
+		<selectKey keyProperty="p_no" resultType="integer" order="BEFORE">
+			select dc_product_detail_image_seq.NEXTVAL from dual
+		</selectKey>
+		insert into dc_product_detail_image(img_no,img_url,img_content,img_sort,p_no)
+		values(#{img_no},#{img_url},#{img_content},#{img_sort},#{p_no})
+	</insert>
+	
+	<resultMap id="dc_productMap" type="com.springboot.meongnyang_Jiphapso.dto.ProductDto">
+		<id property="p_no" column="p_no" />
+		<result property="p_title" column="p_title" />
+		<result property="p_brand" column="p_brand" />
+		<result property="p_category" column="p_category" />
+		<result property="p_type" column="p_type" />
+	</resultMap>
+	<resultMap id="dc_productOptionMap" type="com.springboot.meongnyang_Jiphapso.dto.ProductOptionDto">
+		<id property="o_no" column="o_no" />
+		<result property="o_price" column="o_price" />
+		<result property="o_origin_price" column="o_origin_price" />
+		<result property="o_main_img" column="o_main_img" />
+		<result property="o_quantity" column="o_quantity" />
+		<result property="o_type_size" column="o_type_size" />
+		<result property="o_color" column="o_color" />
+		<result property="o_default" column="o_default" />
+		<result property="p_no" column="p_no" />
+	</resultMap>
+	<resultMap id="dc_productDetailImageMap" type="com.springboot.meongnyang_Jiphapso.dto.ProductDetailImageDto">
+		<id property="img_no" column="img_no" />
+		<result property="img_url" column="img_url" />
+		<result property="img_content" column="img_content" />
+		<result property="img_sort" column="img_sort" />
+		<result property="p_no" column="p_no" />
+	</resultMap>
+</mapper>
