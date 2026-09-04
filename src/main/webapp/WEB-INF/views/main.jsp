@@ -14,6 +14,7 @@
 	<img src="/images/image.png" width="300px" height="auto"/><br>
 	<a href="/loginForm">로그인</a><br>
 	<a href="/memberInsertForm">회원가입</a>
+	<a href="/commWriteForm">글쓰기</a>
 	<!-- 일반 회원 -->
 	<sec:authorize access="hasRole('USER')">
 			회원님, 환영합니다.<br>
